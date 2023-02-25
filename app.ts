@@ -10,6 +10,7 @@ const app: express.Application = express();
 
 //const { userRouter } = require("./resources/user/user.router");
 const { scoreRouter } = require("./resources/score/score.router");
+const { boardRouter } = require("./resources/board/board.router");
 
 
 
@@ -18,6 +19,7 @@ const { scoreRouter } = require("./resources/score/score.router");
 app.use(express.json());
 //app.use("/api/users", userRouter);
 app.use("/api/scorelist", scoreRouter);
+app.use("/api/board", boardRouter);
 
 
 

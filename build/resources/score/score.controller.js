@@ -26,13 +26,31 @@ function getScoreList(_req, res) {
         }
     });
 }
+function getPlayer(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const player = yield score_model_1.default.findOne(req.params).exec();
+            if (!player) {
+                res.status(404).send("Player not found");
+            }
+            console.log(player);
+            res.status(200).json(player);
+        }
+        catch (error) {
+            console.error(error);
+            res.status(500).send('Internal server error');
+        }
+    });
+}
 function postScore(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        console.log("req.body");
+        console.log(req.body);
         try {
             const score = yield new score_model_1.default(req.body);
             yield score.save();
-            console.log(req.body);
-            console.log(score);
+            // console.log(req.body);
+            // console.log(score);
             return res.status(201).json("Sparad användare");
         }
         catch (error) {
@@ -43,4 +61,20 @@ function postScore(req, res) {
         return res.status(200).json("Detta är utanför Try-Catch");
     });
 }
-module.exports = { getScoreList, postScore };
+function updateScore(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield score_model_1.default.findOneAndUpdate(req.params, req.body);
+            const uppdatedScore = yield score_model_1.default.findOne(req.params).exec();
+            if (!uppdatedScore) {
+                return res.status(404).json("Player doesnt exist");
+            }
+            return res.status(201).json(uppdatedScore);
+        }
+        catch (error) {
+            console.log(error);
+            return res.status(401).json("Bad creds");
+        }
+    });
+}
+module.exports = { getScoreList, postScore, getPlayer, updateScore };
