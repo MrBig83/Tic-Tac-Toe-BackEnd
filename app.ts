@@ -1,4 +1,5 @@
 import express from "express";
+
 //import cors from "cors";
 
 const app: express.Application = express();
@@ -7,7 +8,7 @@ const app: express.Application = express();
 //     origin: "http://127.0.0.1:5500"
 // };
 
-const { userRouter } = require("./resources/user/user.router");
+//const { userRouter } = require("./resources/user/user.router");
 const { scoreRouter } = require("./resources/score/score.router");
 
 
@@ -15,8 +16,10 @@ const { scoreRouter } = require("./resources/score/score.router");
 
 //app.use(cors(corsOptions))
 app.use(express.json());
-app.use("/api/users", userRouter);
+//app.use("/api/users", userRouter);
 app.use("/api/scorelist", scoreRouter);
+
+
 
 
 

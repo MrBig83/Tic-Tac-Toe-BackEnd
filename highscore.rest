@@ -1,0 +1,13 @@
+GET http://localhost:3000/api/scorelist
+
+###
+
+POST http://localhost:3000/api/scorelist
+Content-Type: application/json
+
+{
+    "player":"Player3", 
+    "score": 1, 
+    "bio":"Test Bio"
+}
+###

@@ -12,10 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importDefault(require("express"));
+//import express from "express";
 const mongoose_1 = __importDefault(require("mongoose"));
 //import app from "./app"
-const application = (0, express_1.default)();
+const { app } = require("./app");
+//const app: express.Application = express();
 const port = 3000;
 main().catch((err) => console.log(err));
 function main() {
@@ -23,7 +24,7 @@ function main() {
         console.log("Connected to DB & Webserver");
         mongoose_1.default.set("strictQuery", true);
         yield mongoose_1.default.connect("mongodb://127.0.0.1:27017/TicTacToe");
-        application.listen(port, () => {
+        app.listen(port, () => {
             console.log(`TypeScript with Express http://localhost:${port}`);
         });
     });

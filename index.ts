@@ -1,9 +1,10 @@
-import express from "express";
+//import express from "express";
 import mongoose from "mongoose";
 //import app from "./app"
+const { app } = require("./app")
 
 
-const application: express.Application = express();
+//const app: express.Application = express();
 
 const port:number = 3000;
 
@@ -14,7 +15,7 @@ async function main(){
     mongoose.set("strictQuery", true);
     await mongoose.connect("mongodb://127.0.0.1:27017/TicTacToe")
 
-    application.listen(port, () => {
+    app.listen(port, () => {
         console.log(`TypeScript with Express http://localhost:${port}`); 
     });
 };

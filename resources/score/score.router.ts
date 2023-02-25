@@ -1,8 +1,11 @@
 import express from "express";
 const scoreRouter = express.Router()
 
-const { hello } = require("./score.controller")
+const { getScoreList, postScore } = require("./score.controller")
 
-scoreRouter.get("/", hello)
 
-module.exports = { scoreRouter}
+scoreRouter.get("/", getScoreList)
+scoreRouter.post("/", postScore)
+
+
+module.exports = { scoreRouter }
