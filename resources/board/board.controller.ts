@@ -14,7 +14,7 @@ async function createBoard(req: express.Request, res: express.Response){
         
         await board.save()
 
-        return res.status(200).json("New board created")
+        return res.status(200).json(board._id)
     } catch (error) {
         console.log(error);
         return res.status(402).json("Cant create board")
@@ -35,7 +35,21 @@ async function getBoard(_req: express.Request, res: express.Response){
 
 }
 
+async function updateBoard(req: express.Request, res: express.Response){
+    try{
+        await BoardModel.findByIdAndUpdate(req.params, req.body)
+        const updatedBoard = await BoardModel.findById(req.params).exec();
+        if(!updatedBoard){
+            return res.status(404).json("The board doesnt exist")
+        }
+        return res.status(201).json(updatedBoard)
+    } catch (error) {
+        console.log(error);
+        return res.status(401).json("Bad input")
+    }
+}
 
 
-module.exports = { getBoard, createBoard }
+
+module.exports = { getBoard, createBoard, updateBoard }
 
