@@ -2,10 +2,6 @@ import * as express from "express";
 import { IBoard } from "./board.model"; 
 import BoardModel from "./board.model"; 
 
-// interface BoardData {
-//     square: number;
-//     content: string | null;
-//   }
 async function createBoard(req: express.Request, res: express.Response){
     console.log(req.body);
     try{

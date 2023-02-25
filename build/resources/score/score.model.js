@@ -8,9 +8,5 @@ exports.ScoreSchema = new mongoose_1.Schema({
     bio: { type: String, required: true },
     //categories: { type: [Schema.Types.ObjectId], ref: "category", required: true}, //Detta är en FK, mer jobb krävs. 
 });
-//const CardModel = models<ICard>("Card", cardSchema) || model("card", cardSchema);
 exports.ScoreModel = (0, mongoose_1.model)('Score', exports.ScoreSchema);
-//export const ScoreModel = models['score'] || model("score", scoreSchema);  
 exports.default = exports.ScoreModel;
-//module.exports = ScoreModel;
-//module.exports = CardModel;

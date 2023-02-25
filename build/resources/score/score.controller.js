@@ -49,8 +49,6 @@ function postScore(req, res) {
         try {
             const score = yield new score_model_1.default(req.body);
             yield score.save();
-            // console.log(req.body);
-            // console.log(score);
             return res.status(201).json("Sparad användare");
         }
         catch (error) {

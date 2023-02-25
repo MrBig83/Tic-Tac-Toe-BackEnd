@@ -1,12 +1,5 @@
 
 import { Document, Schema, model } from "mongoose"; //, models
-//import * as mongoose from 'mongoose';
-
-// interface IHighScore {
-//     player: string,
-//     score: number,
-//     bio: string,   
-// }
 
 export interface IBoard extends Document {
     1: string,
@@ -18,7 +11,6 @@ export interface IBoard extends Document {
     7: string,
     8: string,
     9: string,
-
 }
 
 export const BoardSchema = new Schema<IBoard>({ 
@@ -36,15 +28,7 @@ export const BoardSchema = new Schema<IBoard>({
     //categories: { type: [Schema.Types.ObjectId], ref: "category" , //Detta är en FK, mer jobb krävs. 
 
 });
-//const CardModel = models<ICard>("Card", cardSchema) || model("card", cardSchema);
-
-
-
 
 export const BoardModel = model<IBoard>('Board', BoardSchema);
-//export const BoardModel = models['score'] || model("score", scoreSchema);  
 
 export default BoardModel
-
-//module.exports = BoardModel;
-//module.exports = CardModel;

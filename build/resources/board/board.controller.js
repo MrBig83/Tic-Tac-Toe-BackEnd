@@ -13,17 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const board_model_1 = __importDefault(require("./board.model"));
-// interface BoardData {
-//     square: number;
-//     content: string | null;
-//   }
 function createBoard(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         console.log(req.body);
         try {
             const board = yield new board_model_1.default(req.body);
             yield board.save();
-            return res.status(200).json("New board created");
+            return res.status(200).json(board._id);
         }
         catch (error) {
             console.log(error);
@@ -45,4 +41,20 @@ function getBoard(_req, res) {
         }
     });
 }
-module.exports = { getBoard, createBoard };
+function updateBoard(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield board_model_1.default.findByIdAndUpdate(req.params, req.body);
+            const updatedBoard = yield board_model_1.default.findById(req.params).exec();
+            if (!updatedBoard) {
+                return res.status(404).json("The board doesnt exist");
+            }
+            return res.status(201).json(updatedBoard);
+        }
+        catch (error) {
+            console.log(error);
+            return res.status(401).json("Bad input");
+        }
+    });
+}
+module.exports = { getBoard, createBoard, updateBoard };

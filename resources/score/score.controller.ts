@@ -1,10 +1,6 @@
 import * as express from "express";
-//import { Document } from "mongoose";
-//import type DocumentQuery from 'mongoose';
-
 import { IScore } from "./score.model"; 
 import ScoreModel from "./score.model"; 
-
 
 async function getScoreList(_req: express.Request, res: express.Response): Promise<void> {
   try {
@@ -36,8 +32,6 @@ async function postScore(req: express.Request, res: express.Response){
     try{
         const score = await new ScoreModel(req.body)
         await score.save()
-        // console.log(req.body);
-        // console.log(score);
         
         return res.status(201).json("Sparad användare")
     } catch (error){
@@ -62,7 +56,5 @@ async function updateScore(req: express.Request, res: express.Response){
         return res.status(401).json("Bad creds")
     }
 }
-
-
 
 module.exports = { getScoreList, postScore, getPlayer, updateScore };

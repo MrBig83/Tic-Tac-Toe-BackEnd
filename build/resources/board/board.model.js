@@ -14,9 +14,5 @@ exports.BoardSchema = new mongoose_1.Schema({
     9: { type: String },
     //categories: { type: [Schema.Types.ObjectId], ref: "category" , //Detta är en FK, mer jobb krävs. 
 });
-//const CardModel = models<ICard>("Card", cardSchema) || model("card", cardSchema);
 exports.BoardModel = (0, mongoose_1.model)('Board', exports.BoardSchema);
-//export const BoardModel = models['score'] || model("score", scoreSchema);  
 exports.default = exports.BoardModel;
-//module.exports = BoardModel;
-//module.exports = CardModel;
