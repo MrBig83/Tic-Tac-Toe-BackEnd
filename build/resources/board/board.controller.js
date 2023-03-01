@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const board_model_1 = __importDefault(require("./board.model"));
 function createBoard(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log(req.body);
         try {
             const board = yield new board_model_1.default(req.body);
             yield board.save();
@@ -23,7 +22,7 @@ function createBoard(req, res) {
         }
         catch (error) {
             console.log(error);
-            return res.status(402).json("Cant create board");
+            return res.status(401).json("Cant create board");
         }
         return res.status(200).json("Detta är utanför Try-Catch");
     });
@@ -32,7 +31,6 @@ function getBoard(_req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const board = yield board_model_1.default.find().exec();
-            console.log(board);
             res.status(200).json(board);
         }
         catch (error) {
@@ -41,15 +39,25 @@ function getBoard(_req, res) {
         }
     });
 }
+function getSpecificBoard(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const specificBoard = yield board_model_1.default.findById(req.params);
+            return res.status(200).json(specificBoard);
+        }
+        catch (error) {
+            console.log(error);
+            return res.status(404).json("Bad request. Board not found");
+        }
+    });
+}
 function updateBoard(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            yield board_model_1.default.findByIdAndUpdate(req.params, req.body);
-            const updatedBoard = yield board_model_1.default.findById(req.params).exec();
-            if (!updatedBoard) {
-                return res.status(404).json("The board doesnt exist");
-            }
-            return res.status(201).json(updatedBoard);
+            const board = yield board_model_1.default.findById(req.params);
+            board[req.body.pos] = req.body.symbol;
+            yield board.save();
+            return res.status(200).json(board);
         }
         catch (error) {
             console.log(error);
@@ -57,4 +65,4 @@ function updateBoard(req, res) {
         }
     });
 }
-module.exports = { getBoard, createBoard, updateBoard };
+module.exports = { getBoard, createBoard, updateBoard, getSpecificBoard };

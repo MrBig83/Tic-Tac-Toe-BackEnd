@@ -17,7 +17,6 @@ function getScoreList(_req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             const scoreList = yield score_model_1.default.find().exec();
-            console.log(scoreList);
             res.status(200).json(scoreList);
         }
         catch (error) {
@@ -33,7 +32,6 @@ function getPlayer(req, res) {
             if (!player) {
                 res.status(404).send("Player not found");
             }
-            console.log(player);
             res.status(200).json(player);
         }
         catch (error) {
@@ -44,8 +42,6 @@ function getPlayer(req, res) {
 }
 function postScore(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        console.log("req.body");
-        console.log(req.body);
         try {
             const score = yield new score_model_1.default(req.body);
             yield score.save();
@@ -53,8 +49,7 @@ function postScore(req, res) {
         }
         catch (error) {
             console.log(error);
-            res.status(401).json(req.body.player + " - username already exists");
-            return;
+            return res.status(401).json(req.body.player + " - username already exists");
         }
         return res.status(200).json("Detta är utanför Try-Catch");
     });
@@ -75,4 +70,20 @@ function updateScore(req, res) {
         }
     });
 }
-module.exports = { getScoreList, postScore, getPlayer, updateScore };
+function updateBio(req, res) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            yield score_model_1.default.findOneAndUpdate(req.params, req.body);
+            const uppdatedScore = yield score_model_1.default.findOne(req.params).exec();
+            if (!uppdatedScore) {
+                return res.status(404).json("Player doesnt exist");
+            }
+            return res.status(201).json(uppdatedScore);
+        }
+        catch (error) {
+            console.log(error);
+            return res.status(401).json("Bad creds");
+        }
+    });
+}
+module.exports = { getScoreList, postScore, getPlayer, updateScore, updateBio };

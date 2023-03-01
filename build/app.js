@@ -4,17 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-//import cors from "cors";
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
-// const corsOptions = {
-//     origin: "http://127.0.0.1:5500"
-// };
-//const { userRouter } = require("./resources/user/user.router");
 const { scoreRouter } = require("./resources/score/score.router");
 const { boardRouter } = require("./resources/board/board.router");
-//app.use(cors(corsOptions))
+app.use((0, cors_1.default)());
 app.use(express_1.default.json());
-//app.use("/api/users", userRouter);
 app.use("/api/scorelist", scoreRouter);
 app.use("/api/board", boardRouter);
 app.get("/", (_req, res) => {

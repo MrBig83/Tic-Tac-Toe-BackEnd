@@ -1,32 +1,27 @@
-
-import { Document, Schema, model } from "mongoose"; //, models
+import { Document, Schema, model } from "mongoose";
 
 export interface IBoard extends Document {
-    1: string,
-    2: string,
-    3: string,
-    4: string,
-    5: string,
-    6: string,
-    7: string,
-    8: string,
-    9: string,
+    a: string,
+    b: string,
+    c: string,
+    d: string,
+    e: string,
+    f: string,
+    g: string,
+    h: string,
+    i: string,
 }
 
 export const BoardSchema = new Schema<IBoard>({ 
-    1: { type: String },
-    2: { type: String },
-    3: { type: String },
-    4: { type: String },
-    5: { type: String },
-    6: { type: String },
-    7: { type: String },
-    8: { type: String },
-    9: { type: String },
-    
-        
-    //categories: { type: [Schema.Types.ObjectId], ref: "category" , //Detta är en FK, mer jobb krävs. 
-
+    a: { type: String },
+    b: { type: String },
+    c: { type: String },
+    d: { type: String },
+    e: { type: String },
+    f: { type: String },
+    g: { type: String },
+    h: { type: String },
+    i: { type: String },
 });
 
 export const BoardModel = model<IBoard>('Board', BoardSchema);

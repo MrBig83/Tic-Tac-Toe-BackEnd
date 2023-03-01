@@ -12,11 +12,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-//import express from "express";
 const mongoose_1 = __importDefault(require("mongoose"));
-//import app from "./app"
 const { app } = require("./app");
-//const app: express.Application = express();
 const port = 3000;
 main().catch((err) => console.log(err));
 function main() {
