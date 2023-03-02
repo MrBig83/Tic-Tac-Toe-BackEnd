@@ -37,6 +37,8 @@ async function postScore(req: express.Request, res: express.Response){
 }
 
 async function updateScore(req: express.Request, res: express.Response){
+  console.log("BE: Uppdatera poängen");
+  
     try{
         await ScoreModel.findOneAndUpdate(req.params, req.body)
         const uppdatedScore = await ScoreModel.findOne(req.params).exec();
@@ -51,13 +53,16 @@ async function updateScore(req: express.Request, res: express.Response){
 }
 
 async function updateBio(req: express.Request, res: express.Response){
+  console.log("BE: Update bio. Yey");
+  console.log(req.body);
+  
   try{
     await ScoreModel.findOneAndUpdate(req.params, req.body)
-    const uppdatedScore = await ScoreModel.findOne(req.params).exec();
-    if(!uppdatedScore){
+    const uppdatedBio = await ScoreModel.findOne(req.params).exec();
+    if(!uppdatedBio){
         return res.status(404).json("Player doesnt exist")
     }
-    return res.status(201).json(uppdatedScore)
+    return res.status(201).json(uppdatedBio)
 } catch (error) {
     console.log(error)
     return res.status(401).json("Bad creds")

@@ -56,6 +56,7 @@ function postScore(req, res) {
 }
 function updateScore(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        console.log("BE: Uppdatera poängen");
         try {
             yield score_model_1.default.findOneAndUpdate(req.params, req.body);
             const uppdatedScore = yield score_model_1.default.findOne(req.params).exec();
@@ -72,13 +73,15 @@ function updateScore(req, res) {
 }
 function updateBio(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        console.log("BE: Update bio. Yey");
+        console.log(req.body);
         try {
             yield score_model_1.default.findOneAndUpdate(req.params, req.body);
-            const uppdatedScore = yield score_model_1.default.findOne(req.params).exec();
-            if (!uppdatedScore) {
+            const uppdatedBio = yield score_model_1.default.findOne(req.params).exec();
+            if (!uppdatedBio) {
                 return res.status(404).json("Player doesnt exist");
             }
-            return res.status(201).json(uppdatedScore);
+            return res.status(201).json(uppdatedBio);
         }
         catch (error) {
             console.log(error);
